@@ -2,7 +2,6 @@ package cz.uhk.zlomky.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -45,9 +44,6 @@ public class SeznamZlomkuTest {
         assertEquals(zlomek, seznam.vratZlomek(0));
     }
 
-    // TODO ODEBRAT Z PRÁZDNÉHO
-    // TODO ODEBRAT NEEXISTUJÍCÍ
-    // TODO ODEBRAT NORMÁLNĚ
     @Test
     void testOdebratZlomek() {
         seznam.pridatZlomek(new Zlomek(3, 5));
@@ -56,21 +52,43 @@ public class SeznamZlomkuTest {
         assertEquals(0, seznam.pocetZlomku());
     }   
 
-    // TODO SPOČÍST NORMÁLNĚ
-    // TODO SPOČÍST PRÁZDNÉ
+    @Test
+    void testOdebratZlomekZPrazdneho() {
+        assertThrows(IndexOutOfBoundsException.class, () -> seznam.odebratZlomek(0));
+    }   
+
+
     @Test
     void testSpoctiPrumer() {
-        fail();
+        seznam.pridatZlomek(new Zlomek(1, 2));
+        seznam.pridatZlomek(new Zlomek(1, 4));
+        seznam.pridatZlomek(new Zlomek(1, 8));
+        seznam.pridatZlomek(new Zlomek(1, 8));
+
+        Zlomek prumer  = seznam.spoctiPrumer();
+
+        assertEquals("1 / 4", prumer.toString());
     }
 
-    // TODO SPOČÍST NORMÁLNĚ
-    // TODO SPOČÍST PRÁZDNÉ
-    // TODO PAK POSLAT NA EMAIL
+    @Test 
+    void testSpoctiPrumerNaPrazdnem() {
+        assertThrows(ArithmeticException.class, () -> seznam.spoctiPrumer());
+    }
+
     @Test
     void testSpoctiSoucet() {
-        fail();
+        seznam.pridatZlomek(new Zlomek(1, 2));
+        seznam.pridatZlomek(new Zlomek(1, 4));
+        seznam.pridatZlomek(new Zlomek(1, 8));
+        seznam.pridatZlomek(new Zlomek(1, 8));
+
+        assertEquals(1., seznam.spoctiSoucet().doubleValue());
     }
 
+    @Test
+    void testSpoctiSoucetNaPrazdnem() {
+        assertThrows(ArithmeticException.class, () -> seznam.spoctiSoucet());
+    }
 
     @Test
     void testVypisZlomky() {
