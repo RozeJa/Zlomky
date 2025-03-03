@@ -1,4 +1,4 @@
-package cz.uhk.zlomky;
+package cz.uhk.zlomky.app;
 
 public class ZlomkyAppTest {
 }

@@ -1,4 +1,4 @@
-package cz.uhk.zlomky;
+package cz.uhk.zlomky.app;
 
 import cz.uhk.zlomky.model.Zlomek;
 
